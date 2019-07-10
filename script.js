@@ -73,7 +73,7 @@ var directionalLight2 = new THREE.DirectionalLight(0xff0000, 2)
 directionalLight2.position.set(0, -39, 30)
 
 var directionalLight = new THREE.DirectionalLight(0x0000ff, 2)
-directionalLight.position.set(30, -100, 30)
+directionalLight2.position.set(0, 39, 30)
 scene.add(directionalLight2)
 scene.add(directionalLight)
 /* ////////////////////////////////////////////////////////////////////////// */
@@ -85,18 +85,14 @@ loader.crossOrigin = true
 loader.load('scene.gltf', function(data) {
   object = data.scene
 
-  object.scale.set(0.1, 0.1, 0.1)
-  console.log(object)
-  object.rotation.x = 3
-  object.rotation.y = 3
+  object.scale.set(1, 1, 1)
 
   var gltf = data
-  // if (gltf.animations && gltf.animations.length) {
-  //   // mixer = new THREE.AnimationMixer(gltf.scene)
-  //   // for (var i = 0; i < gltf.animations.length; i++) {
-  //   //   // var animation = gltf.animations[0]
-  //   //   // mixer.clipAction(animation).play()
-  //   // }
+  if (gltf.animations && gltf.animations.length) {
+    mixer = new THREE.AnimationMixer(gltf.scene)
+    var animation = gltf.animations[0]
+    mixer.clipAction(animation).play()
+  }
   // }
 
   scene.add(object)
